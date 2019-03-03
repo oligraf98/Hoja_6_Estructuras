@@ -16,8 +16,8 @@ public class Carta {
         return cantidad;
     }
 
-    public void add(){
-        cantidad++;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public Carta(String nombre, String tipo) {
