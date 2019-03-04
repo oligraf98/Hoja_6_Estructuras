@@ -2,9 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -73,6 +71,8 @@ public class Main {
                             nombre = nombre + c;
                         }
                     }
+                    System.out.println(nombre);
+                    System.out.println(tipo);
                     Carta carta = new Carta(nombre, tipo);
                     coleccion.put(carta.getNombre(), carta);
                 }
@@ -131,16 +131,104 @@ public class Main {
                     }
                     break;
                 case "3":
-                    for (Map.Entry<String, Carta> entrada: deck.entrySet()){
+                    System.out.println(subMenu());
+                    String opc = input.nextLine();
+                    switch (opc){
+                        case "1":
+                            Map<Character, ArrayList<Carta>> abc = new HashMap<>();
+                            for(Map.Entry<String, Carta> entrada: deck.entrySet()){
+                                if(abc.containsKey(entrada.getValue().getNombre().charAt(0))){
+                                    abc.get(entrada.getValue().getNombre().charAt(0)).add(entrada.getValue());
+                                } else{
+                                    abc.put(entrada.getValue().getNombre().charAt(0), new ArrayList<>());
+                                    abc.get(entrada.getValue().getNombre().charAt(0)).add(entrada.getValue());
+                                }
+                            }
+                            for(Map.Entry<Character, ArrayList<Carta>> entry: abc.entrySet()){
+                                for(Carta carta: entry.getValue()){
+                                    System.out.println("Nombre: "+ carta.getNombre() + "\nTipo: " + carta.getTipo()+ "\nCantidad en el deck: "+ String.valueOf(carta.getCantidad())+"\n");
+                                }
+                            }
+                            break;
+                        case"2":
+                            ArrayList<Carta> monstruos = new ArrayList<>();
+                            ArrayList<Carta> hechizos = new ArrayList<>();
+                            ArrayList<Carta> trampas = new ArrayList<>();
+                            for(Map.Entry<String, Carta> entrada: deck.entrySet()){
+                                if(entrada.getValue().getTipo().equals("Monstruo")){
+                                    monstruos.add(entrada.getValue());
+                                } else if(entrada.getValue().getTipo().equals("Hechizo")){
+                                    hechizos.add(entrada.getValue());
+                                } else if(entrada.getValue().getTipo().equals("Trampa")){
+                                    trampas.add(entrada.getValue());
+                                }
+                            }
+                            for(Carta c: monstruos){
+                                System.out.println("Nombre: " + c.getNombre() + "\nTipo: "+ c.getTipo() +"\nCantidad en el deck: "+ c.getCantidad()+ "\n");
+                            }
+                            for(Carta c: hechizos){
+                                System.out.println("Nombre: " + c.getNombre() + "\nTipo: "+ c.getTipo() +"\nCantidad en el deck: "+ c.getCantidad()+ "\n");
+                            }
+                            for(Carta c: trampas){
+                                System.out.println("Nombre: " + c.getNombre() + "\nTipo: "+ c.getTipo() +"\nCantidad en el deck: "+ c.getCantidad()+ "\n");
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    /*for (Map.Entry<String, Carta> entrada: deck.entrySet()){
                         System.out.println("\nNombre: "+entrada.getKey()+"\nTipo: "+entrada.getValue().getTipo() + "\nCantidad en el deck: "+ String.valueOf(entrada.getValue().getCantidad())+"\n");
 
-                    }
+                    }*/
                     break;
                 case "4":
-                    for (Map.Entry<String, Carta> entrada: coleccion.entrySet()){
-                        System.out.println("\nNombre: "+entrada.getKey()+"\nTipo: "+entrada.getValue().getTipo());
-
+                    System.out.println(subMenu());
+                    String opc1 = input.nextLine();
+                    switch (opc1){
+                        case "1":
+                            Map<Character, ArrayList<Carta>> abc = new HashMap<>();
+                            for(Map.Entry<String, Carta> entrada: coleccion.entrySet()){
+                                if(abc.containsKey(entrada.getValue().getNombre().charAt(0))){
+                                    abc.get(entrada.getValue().getNombre().charAt(0)).add(entrada.getValue());
+                                } else{
+                                    abc.put(entrada.getValue().getNombre().charAt(0), new ArrayList<>());
+                                    abc.get(entrada.getValue().getNombre().charAt(0)).add(entrada.getValue());
+                                }
+                            }
+                            for(Map.Entry<Character, ArrayList<Carta>> entry: abc.entrySet()){
+                                for(Carta carta: entry.getValue()){
+                                    System.out.println("Nombre: "+ carta.getNombre() + "\nTipo: " + carta.getTipo()+ "\n");
+                                }
+                            }
+                            break;
+                        case "2":
+                            ArrayList<Carta> monstruos = new ArrayList<>();
+                            ArrayList<Carta> hechizos = new ArrayList<>();
+                            ArrayList<Carta> trampas = new ArrayList<>();
+                            for(Map.Entry<String, Carta> entrada: coleccion.entrySet()){
+                                if(entrada.getValue().getTipo().equals("Monstruo")){
+                                    monstruos.add(entrada.getValue());
+                                } else if(entrada.getValue().getTipo().equals("Hechizo")){
+                                    hechizos.add(entrada.getValue());
+                                } else if(entrada.getValue().getTipo().equals("Trampa")){
+                                    trampas.add(entrada.getValue());
+                                }
+                            }
+                            for(Carta c: monstruos){
+                                System.out.println("Nombre: " + c.getNombre() + "\nTipo: "+ c.getTipo() +"\n");
+                            }
+                            for(Carta c: hechizos){
+                                System.out.println("Nombre: " + c.getNombre() + "\nTipo: "+ c.getTipo() +"\n");
+                            }
+                            for(Carta c: trampas){
+                                System.out.println("Nombre: " + c.getNombre() + "\nTipo: "+ c.getTipo() +"\n");
+                            }
+                            break;
+                        default:
+                            System.out.println("Opcion no valida. Intentelo de nuevo.\n");
+                            break;
                     }
+
                     break;
                 case "5":
                     System.out.println("Cerrando el programa.");
