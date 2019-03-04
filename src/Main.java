@@ -1,3 +1,10 @@
+/*Oliver Graf - 17190
+*Este programa utiliza las clases Carta y MapFactory para crear un deck de cartas de una coleccion o base de datos de cartas extraidas de un archivo txt.
+*
+* */
+
+
+//==============================================================================================================================================================================
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -71,8 +78,8 @@ public class Main {
                             nombre = nombre + c;
                         }
                     }
-                    System.out.println(nombre);
-                    System.out.println(tipo);
+                    /*System.out.println(nombre);
+                    System.out.println(tipo);*/
                     Carta carta = new Carta(nombre, tipo);
                     coleccion.put(carta.getNombre(), carta);
                 }
@@ -83,6 +90,9 @@ public class Main {
                 System.out.println("No fue posible crear la coleccion de cartas con la direccion que especifico. Intentelo de nuevo...");
             }
         }while(on == false);
+
+        //Si se llega hasta aqui, es porque fue exitosa la creacion de la base de datos de cartas, con la implementacion que eligio el usuario.
+        //Aqui se despliega el menu principal y el usuario puede elegir entre una de las 5 opciones.
 
         System.out.println("Elija el numero de la opcion que desea.");
         String opcion;
@@ -135,7 +145,7 @@ public class Main {
                     String opc = input.nextLine();
                     switch (opc){
                         case "1":
-                            Map<Character, ArrayList<Carta>> abc = new HashMap<>();
+                            Map<Character, ArrayList<Carta>> abc = new LinkedHashMap<>();
                             for(Map.Entry<String, Carta> entrada: deck.entrySet()){
                                 if(abc.containsKey(entrada.getValue().getNombre().charAt(0))){
                                     abc.get(entrada.getValue().getNombre().charAt(0)).add(entrada.getValue());
@@ -186,7 +196,7 @@ public class Main {
                     String opc1 = input.nextLine();
                     switch (opc1){
                         case "1":
-                            Map<Character, ArrayList<Carta>> abc = new HashMap<>();
+                            Map<Character, ArrayList<Carta>> abc = new LinkedHashMap<>();
                             for(Map.Entry<String, Carta> entrada: coleccion.entrySet()){
                                 if(abc.containsKey(entrada.getValue().getNombre().charAt(0))){
                                     abc.get(entrada.getValue().getNombre().charAt(0)).add(entrada.getValue());
